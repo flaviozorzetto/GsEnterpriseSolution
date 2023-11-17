@@ -1,0 +1,16 @@
+﻿@model Login
+
+<form asp-action="add">
+
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required="true" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Senha"></label>
+        <input asp-for="Senha" class="form-control" required="true" />
+    </div>
+
+    <button class="btn btn-primary">Cadastrar</button>
+
+</form>

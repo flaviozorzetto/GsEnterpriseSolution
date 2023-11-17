@@ -1,0 +1,9 @@
+﻿@model Login
+
+@if (Model == null)
+{
+    <div class="d-flex flex-column gap-5 align-items-center">
+        <h1 class="display-4">You are currently not logged in</h1>
+        <a asp-action="index" asp-controller="login">Click to login</a>
+    </div>
+}
