@@ -105,6 +105,47 @@ namespace GsEnterpriseSolution.Migrations
                     b.ToTable("TABLE_GS_SOLUTION_LOGIN");
                 });
 
+            modelBuilder.Entity("GsEnterpriseSolution.Models.Profissional", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Crm")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Especialidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoginId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sobrenome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LoginId");
+
+                    b.ToTable("Profissionais");
+                });
+
             modelBuilder.Entity("GsEnterpriseSolution.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -124,10 +165,7 @@ namespace GsEnterpriseSolution.Migrations
                     b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Especialidade")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LoginId")
+                    b.Property<int>("LoginId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -145,9 +183,6 @@ namespace GsEnterpriseSolution.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
@@ -164,6 +199,17 @@ namespace GsEnterpriseSolution.Migrations
                         .HasForeignKey("UsuarioId");
                 });
 
+            modelBuilder.Entity("GsEnterpriseSolution.Models.Profissional", b =>
+                {
+                    b.HasOne("GsEnterpriseSolution.Models.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Login");
+                });
+
             modelBuilder.Entity("GsEnterpriseSolution.Models.Usuario", b =>
                 {
                     b.HasOne("GsEnterpriseSolution.Models.Endereco", "Endereco")
@@ -172,7 +218,9 @@ namespace GsEnterpriseSolution.Migrations
 
                     b.HasOne("GsEnterpriseSolution.Models.Login", "Login")
                         .WithMany()
-                        .HasForeignKey("LoginId");
+                        .HasForeignKey("LoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Endereco");
 

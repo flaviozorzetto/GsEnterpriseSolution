@@ -12,7 +12,7 @@ namespace GsEnterpriseSolution.Models
         public string? Nome { get; set; }
 
         [Required]
-        public string? Sobrenome { get; set;}
+        public string? Sobrenome { get; set; }
 
         [Required, Display(Name = "Data de Nascimento"), DataType(DataType.Date)]
         public DateTime? DataNascimento { get; set; }
@@ -27,6 +27,7 @@ namespace GsEnterpriseSolution.Models
         public Sexo? Sexo { get; set; }
 
         // 1:1
+        [Required]
         public Login? Login { get; set; }
 
         // 1:1
@@ -34,26 +35,10 @@ namespace GsEnterpriseSolution.Models
 
         // 1:N
         public IList<Contato>? Contatos { get; set; }
-
-        [Required]
-        public Tipo? Tipo { get; set; }
-
-        // Vai haver especialidade somente se o tipo = medico
-        public Especialidade? Especialidade { get; set; }
     }
 
     public enum Sexo
     {
         MASCULINO, FEMININO, OUTRO
-    }
-
-    public enum Tipo
-    {
-        MEDICO, PACIENTE
-    }
-
-    public enum Especialidade
-    { 
-        ORTOPEDIA, PEDIATRIA, CLINICO_GERAL, GINECOLOGIA, GERIATRIA, CARDIOLOGIA, OTORRINOLARINGOLOGIA, DEMARTOLOGIA, GASTROENTEROLOGIA, OFTAMOLOGIA, NAO_DEFINIDO
     }
 }

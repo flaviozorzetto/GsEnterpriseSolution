@@ -3,10 +3,20 @@
 @if (Model == null)
 {
     <div class="d-flex flex-column gap-5 align-items-center">
-        <h1 class="display-4">You are currently not logged in</h1>
+        <h1 class="display-5">Você ainda não está logado, selecione uma das opções abaixo</h1>
         <div class="d-flex gap-4">
             <button class="btn btn-primary"><a class="text-light" asp-action="index" asp-controller="login">Logar</a></button>
             <button class="btn btn-secondary"><a class="text-light" asp-action="cadastrar" asp-controller="login">Cadastrar</a></button>
+        </div>
+    </div>
+} else
+{
+    <div class="d-flex flex-column gap-5 align-items-center">
+        <h1 class="display-5">Percebemos que você ainda não possui registro como usuário ou profissional</h1>
+        <h2>Selecione o tipo abaixo:</h2>
+        <div class="d-flex gap-4">
+            <button class="btn btn-primary"><a class="text-light" asp-action="cadastrar" asp-route-loginId="@Model.Id" asp-controller="usuario">Sou usuário</a></button>
+            <button class="btn btn-primary"><a class="text-light" asp-action="cadastrar" asp-route-loginId="@Model.Id" asp-controller="profissional">Sou profissional</a></button>
         </div>
     </div>
 }

@@ -9,6 +9,7 @@ namespace GsEnterpriseSolution.Contexts
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Profissional> Profissionais { get; set; }
 
         public PlataformaContext(DbContextOptions op) : base(op) { }
 

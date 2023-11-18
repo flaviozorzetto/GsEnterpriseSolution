@@ -44,6 +44,31 @@ namespace GsEnterpriseSolution.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Profissionais",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Especialidade = table.Column<int>(type: "int", nullable: false),
+                    Crm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoginId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profissionais", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Profissionais_TABLE_GS_SOLUTION_LOGIN_LoginId",
+                        column: x => x.LoginId,
+                        principalTable: "TABLE_GS_SOLUTION_LOGIN",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TABLE_GS_SOLUTION_USUARIO",
                 columns: table => new
                 {
@@ -55,10 +80,8 @@ namespace GsEnterpriseSolution.Migrations
                     Peso = table.Column<double>(type: "float", nullable: false),
                     Altura = table.Column<double>(type: "float", nullable: false),
                     Sexo = table.Column<int>(type: "int", nullable: false),
-                    LoginId = table.Column<int>(type: "int", nullable: true),
-                    EnderecoId = table.Column<int>(type: "int", nullable: true),
-                    Tipo = table.Column<int>(type: "int", nullable: false),
-                    Especialidade = table.Column<int>(type: "int", nullable: true)
+                    LoginId = table.Column<int>(type: "int", nullable: false),
+                    EnderecoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +95,8 @@ namespace GsEnterpriseSolution.Migrations
                         name: "FK_TABLE_GS_SOLUTION_USUARIO_TABLE_GS_SOLUTION_LOGIN_LoginId",
                         column: x => x.LoginId,
                         principalTable: "TABLE_GS_SOLUTION_LOGIN",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +120,11 @@ namespace GsEnterpriseSolution.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Profissionais_LoginId",
+                table: "Profissionais",
+                column: "LoginId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TABLE_GS_SOLUTION_CONTATO_UsuarioId",
                 table: "TABLE_GS_SOLUTION_CONTATO",
                 column: "UsuarioId");
@@ -114,6 +143,9 @@ namespace GsEnterpriseSolution.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Profissionais");
+
             migrationBuilder.DropTable(
                 name: "TABLE_GS_SOLUTION_CONTATO");
 
