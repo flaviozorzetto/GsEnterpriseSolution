@@ -2,8 +2,6 @@
 using GsEnterpriseSolution.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net;
-using System.Text.Json.Serialization;
 
 namespace GsEnterpriseSolution.Controllers
 {
@@ -30,11 +28,12 @@ namespace GsEnterpriseSolution.Controllers
             if(foundLogin == null)
             {
                 TempData["msg"] = "Login não encontrado";
+                TempData["success"] = "0";
                 return RedirectToAction("Index");
             }
 
             string jsonLogin = JsonConvert.SerializeObject(foundLogin);
-            HttpContext.Response.Cookies.Append("user-data", jsonLogin);
+            HttpContext.Response.Cookies.Append("user-data", jsonLogin, new CookieOptions { Expires = DateTime.Now.AddHours(6) });
 
             return RedirectToAction("Index", "Home");
         }
@@ -66,11 +65,15 @@ namespace GsEnterpriseSolution.Controllers
             if (foundLogin != null)
             {
                 TempData["msg"] = "Já existe um registro de login com este email";
-                return RedirectToAction("Index");
+                TempData["success"] = "0";
+                return RedirectToAction("Cadastrar");
             }
 
             _context.Logins.Add(login);
             _context.SaveChanges();
+
+            TempData["msg"] = "Cadastro criado com sucesso, por favor logue abaixo";
+            TempData["success"] = "1";
 
             return RedirectToAction("Login");
         }

@@ -121,10 +121,6 @@ namespace GsEnterpriseSolution.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Especialidade")
                         .HasColumnType("int");
 

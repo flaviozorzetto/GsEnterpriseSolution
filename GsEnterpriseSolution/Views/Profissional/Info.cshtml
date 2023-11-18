@@ -1,0 +1,12 @@
+﻿@model Profissional
+
+<h1>Suas informações:</h1>
+
+<div class="mt-lg-5">
+    <p>Nome Completo: @Model.Nome @Model.Sobrenome</p>
+    <p>Especialidade: @Model.Especialidade</p>
+    <p>Crm: @Model.Crm</p>
+    <p>Cpf: @Model.Cpf</p>
+</div>
+
+<a asp-action="index" asp-controller="home"><button class="btn btn-primary mt-5">Voltar</button></a>

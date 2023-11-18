@@ -1,0 +1,44 @@
+﻿@model Usuario
+
+<h1>Suas informações:</h1>
+
+<div class="mt-lg-5">
+    <p>Nome Completo: @Model.Nome @Model.Sobrenome</p>
+    <p>Data de nascimento: @Model.DataNascimento.Value.ToShortDateString()</p>
+    <p>Peso: @Model.Peso</p>
+    <p>Sexo: @Model.Sexo</p>
+    <p>Altura: @Model.Altura</p>
+    @if (Model.Contatos.Count == 0)
+    {
+        <p>Contatos: Nenhum contato cadastrado ainda</p>
+    } else
+    {
+        <p>Contatos:</p>
+        <ul>
+        @foreach (var contato in Model.Contatos)
+        {
+            <li>
+                <div class="d-flex align-items-center">
+                    <p class="m-0 me-2">Nome do contato: @contato.Nome, Telefone: @contato.Telefone</p>
+                        <form asp-action="contact" asp-route-usuarioId="@Model.Id" asp-route-id="@contato.Id">
+                            <button class="btn btn-danger">Remover</button>
+                        </form>
+                </div>
+            </li>
+        }
+         </ul>
+    }
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Mostrar informações de endereço
+    </button>
+    <div class="collapse mt-3" id="collapseExample">
+        <p>Logradouro: @Model.Endereco.Logradouro</p>
+        <p>Número: @Model.Endereco.Numero</p>
+        <p>Bairro: @Model.Endereco.Bairro</p>
+        <p>Cidade: @Model.Endereco.Cidade</p>
+        <p>Estado: @Model.Endereco.Estado</p>
+        <p>Cep: @Model.Endereco.Cep</p>
+    </div>
+</div>
+
+<a asp-action="index" asp-controller="home"><button class="btn btn-primary mt-5">Voltar</button></a>

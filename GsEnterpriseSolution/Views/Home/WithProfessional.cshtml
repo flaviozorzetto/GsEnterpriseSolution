@@ -1,0 +1,22 @@
+﻿@model Profissional
+
+<h1>Olá Profissional @Model.Nome @Model.Sobrenome!</h1>
+
+<h2>Selecione uma das opções abaixo</h2>
+
+<ul class="d-flex flex-column gap-4 mt-4">
+    <li><a asp-action="info" asp-controller="Profissional" asp-route-id="@Model.Id">Visualizar minhas informações</a></li>
+    <li><a asp-action="edit" asp-controller="Profissional" asp-route-id="@Model.Id">Editar minhas informações</a></li>
+</ul>
+
+@if (TempData["msg"] != null)
+{
+    @if (TempData["success"].ToString() == "1")
+    {
+        <div class="alert alert-success">@TempData["msg"]</div>
+    }
+    else
+    {
+        <div class="alert alert-danger">@TempData["msg"]</div>
+    }
+}

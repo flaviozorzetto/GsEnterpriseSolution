@@ -53,7 +53,6 @@ namespace GsEnterpriseSolution.Migrations
                     Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Especialidade = table.Column<int>(type: "int", nullable: false),
                     Crm = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LoginId = table.Column<int>(type: "int", nullable: false)
                 },

@@ -19,9 +19,6 @@ namespace GsEnterpriseSolution.Models
         public string? Crm { get; set; }
 
         [Required]
-        public string? Email { get; set; }
-
-        [Required]
         public string? Cpf { get; set; }
 
         [Required]

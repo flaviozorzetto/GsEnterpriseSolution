@@ -6,7 +6,12 @@
 
     @if (TempData["msg"] != null)
     {
-        <div class="alert alert-danger">@TempData["msg"]</div>
+        @if(TempData["success"].ToString() == "1")
+        {
+            <div class="alert alert-success">@TempData["msg"]</div>
+        } else {
+            <div class="alert alert-danger">@TempData["msg"]</div>
+        }
     }
 
     <div class="mb-3">

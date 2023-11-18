@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GsEnterpriseSolution.Migrations
 {
     [DbContext(typeof(PlataformaContext))]
-    [Migration("20231118115608_InitialCreate")]
+    [Migration("20231118213459_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -121,10 +121,6 @@ namespace GsEnterpriseSolution.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Crm")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

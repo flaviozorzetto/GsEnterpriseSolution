@@ -1,8 +1,20 @@
 ﻿@model Login
 
-<h1>Cadastrar</h1>
+<h1>Cadastrar novo login</h1>
 
 <form asp-action="cadastrar">
+
+    @if (TempData["msg"] != null)
+    {
+        @if (TempData["success"].ToString() == "1")
+        {
+            <div class="alert alert-success">@TempData["msg"]</div>
+        }
+        else
+        {
+            <div class="alert alert-danger">@TempData["msg"]</div>
+        }
+    }
 
     <div class="mb-3">
         <label asp-for="Email"></label>
