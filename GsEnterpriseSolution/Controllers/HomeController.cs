@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GsEnterpriseSolution.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GsEnterpriseSolution.Controllers
 {
@@ -8,9 +10,10 @@ namespace GsEnterpriseSolution.Controllers
         public IActionResult Index()
         {
             var cookies = HttpContext.Request.Cookies;
-            var userData = cookies.Where(x => x.Key == "user-data").Select(x => x.Key).FirstOrDefault();
+            string? userData = cookies.Where(x => x.Key == "user-data").Select(x => x.Value).FirstOrDefault();
+            var login = JsonConvert.DeserializeObject<Login>(userData);
 
-            return View(userData);
+            return View(login);
         }
     }
 }

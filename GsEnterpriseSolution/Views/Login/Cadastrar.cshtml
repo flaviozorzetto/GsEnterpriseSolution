@@ -1,13 +1,8 @@
 ﻿@model Login
 
-<h1>Login</h1>
+<h1>Cadastrar</h1>
 
-<form asp-action="login">
-
-    @if (TempData["msg"] != null)
-    {
-        <div class="alert alert-danger">@TempData["msg"]</div>
-    }
+<form asp-action="cadastrar">
 
     <div class="mb-3">
         <label asp-for="Email"></label>
@@ -18,6 +13,6 @@
         <input asp-for="Senha" class="form-control" required="true" />
     </div>
 
-    <button class="btn btn-primary">Login</button>
+    <button class="btn btn-primary">Cadastrar</button>
 
 </form>
