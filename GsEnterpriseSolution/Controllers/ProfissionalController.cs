@@ -2,6 +2,7 @@
 using GsEnterpriseSolution.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace GsEnterpriseSolution.Controllers
 {
@@ -71,6 +72,25 @@ namespace GsEnterpriseSolution.Controllers
             TempData["success"] = "1";
 
             return RedirectToAction("index", "home");
+        }
+
+        [HttpGet("pacientes")]
+        public IActionResult ListPacientes(string filtro)
+        {
+            var usuarios = _context.Usuarios
+                .Include(x => x.Endereco)
+                .Include(x => x.Login)
+                .Include(x => x.Contatos)
+                .ToList();
+
+            if(filtro != null)
+            {
+                TempData["filtro"] = filtro;
+                var regex = new Regex(filtro, RegexOptions.IgnoreCase);
+                usuarios = usuarios.Where(x => regex.IsMatch(x.Nome)).ToList();
+            }
+
+            return View(usuarios);
         }
     }
 }
